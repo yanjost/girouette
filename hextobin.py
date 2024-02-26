@@ -1,10 +1,13 @@
+"""Convert data.hex to data.bin"""
 import binascii
 
-fulldata=bytes()
-f=open('data.hex')
-for line in f:
-    line = line[1:].strip()
-    fulldata+=binascii.unhexlify(line)
+with open('data.hex', encoding='ascii') as f:
+    fulldata=bytes()
 
-f2=open('data.bin','wb')
-f2.write(fulldata)
+    for line in f:
+        line = line[1:].strip()
+        fulldata+=binascii.unhexlify(line)
+        
+    with open('data.bin','wb') as f2:
+        f2.write(fulldata)
+        print('data.bin written')
